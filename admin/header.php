@@ -44,7 +44,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo ADMIN_URL.'/new-page.php'; ?>">
+                            <a href="<?php echo ADMIN_URL.'/new_page.php'; ?>">
                                 New page
                             </a>
                         </li>
@@ -62,7 +62,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo ADMIN_URL.'/new-post.php'; ?>">
+                            <a href="<?php echo ADMIN_URL.'/new_post.php'; ?>">
                                 New Post
                             </a>
                             
