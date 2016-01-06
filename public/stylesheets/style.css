@@ -1,0 +1,63 @@
+/* Styles for My First App */
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    /* background-image: url(../images/clouds.jpg); */
+    background-color: darkcyan;
+    font-family: sans-serif;
+}
+
+
+body{
+    height: 100%;
+    width: 100%;
+}
+
+.header {
+    height: 14%;
+    padding-top: 20px;
+    background-color: coral; 
+}
+
+h1 {
+    
+    text-align: center;
+    color: #ff5;
+    background-color: coral;
+}
+
+.main {
+    height: 70%;
+    width: 100%;
+}
+
+.navigation {
+    background-color: darkgrey;
+    color: white;
+    float: left;
+    height: 90.5%;
+    padding: 20px;
+    width: 12%;
+}
+    
+.content {
+    float: left;
+    height: 90.5%;
+    width: 82%;
+    padding: 20px;
+    color: aqua;
+}
+
+.footer {
+    height: 11%;
+    text-align: center;
+    color: #ff5;
+    background-color: coral;
+    width: 100%;
+    padding: 10px 0px;
+}
+
+li{
+    
+}
