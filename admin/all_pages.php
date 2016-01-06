@@ -1,6 +1,6 @@
 <?php require_once("admin_functions.php");?>
 <?php
-    if (isset($_GET['logout'])){
+    if((isset($_GET['logout'])) || (!logged_in())){
         session_destroy();
         header('Location: login.php');
         exit;
