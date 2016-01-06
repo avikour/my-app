@@ -38,7 +38,7 @@
         <div class="content content-all-posts">
             <table>
                 <tr>
-                    <th>Post Name</th>
+                    <th>Post Title</th>
                     <th>Content</th>     
                 </tr>
                 <?php
