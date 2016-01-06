@@ -69,7 +69,7 @@
                                         <a href="<?php echo ADMIN_URL."/edit_user.php?id=".$value['id'];?>">Edit</a>
                                     </td>
                                     <td>
-                                        <a href="<?php echo ADMIN_URL."/delete_user.php?id=".$value['id'];?>">Delete</a>
+                                        <?php echo "<a href=\"?delete={$value['id']}\">Delete</a>";?>
                                     </td>
                                 </tr>
                             <?php
