@@ -1,5 +1,14 @@
 <?php require_once("admin_functions.php");?>
-<?php admin_header(); ?>
+<?php
+    if((isset($_GET['logout'])) || (!logged_in())){
+        session_destroy();
+        header('Location: login.php');
+        exit;
+    }
+    if(logged_in()){
+        admin_header();
+    }
+       ?>
     <div class="content edit-user">
         <?php 
             if (isset($_GET['id'])) {
