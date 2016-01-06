@@ -26,7 +26,13 @@
                                 VALUES (\"{$new_post['post_name']}\",
                                 \"{$new_post['content']}\"
                                 )";
-                create_user($create_query);
+                create_db($create_query);
+            }
+        
+            if(isset($_GET['delete'])){            
+                $delete_query = "DELETE FROM `posts`
+                                WHERE `id` = {$_GET['delete']}";
+                delete_db($delete_query);
             }
         ?>
         <div class="content content-all-posts">
@@ -50,7 +56,7 @@
                             <a href="<?php echo ADMIN_URL."/edit_post.php?id=".$value['id'];?>">Edit</a>
                         </td>
                         <td>
-                            <a href="<?php echo ADMIN_URL."/delete_post.php?id=".$value['id'];?>">Delete</a>
+                            <?php echo "<a href=\"?delete={$value['id']}\">Delete</a>";?>
                         </td>
                     </tr>
                 <?php 

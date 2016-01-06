@@ -26,9 +26,14 @@
                                 VALUES (\"{$new_page['p_name']}\",
                                 \"{$new_page['content']}\"
                                 )";
-                create_user($create_query);
+                create_db($create_query);
             }
-        ?>
+        
+            if(isset($_GET['delete'])){            
+                $delete_query = "DELETE FROM `pages`
+                                WHERE `id` = {$_GET['delete']}";
+                delete_db($delete_query);
+            }
         ?>
         <div class="content content-all-pages">
             <table>
@@ -63,9 +68,5 @@
     </div>
         <?php
     }
-       // else {
-         //   header('Location: login.php');          
-           // exit;
-    //}
 ?>
 <?php admin_footer(); ?>

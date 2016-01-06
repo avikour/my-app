@@ -44,13 +44,18 @@
     function update_db($query){
         global $db;
         mysqli_query($db,$query);
+        
     }
 
-    function create_user($query){
+    function create_db($query){
         global $db;
         mysqli_query($db,$query);
     }
 
+    function delete_db($query){
+        global $db;
+        mysqli_query($db,$query);
+    }
 
     function authenticate(){
         //to authenticate username and password for user login

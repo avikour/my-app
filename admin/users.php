@@ -34,6 +34,12 @@
                                     )";
                     create_user($create_query);
                 }
+        
+                if(isset($_GET['delete'])){            
+                    $delete_query = "DELETE FROM `users`
+                                    WHERE `id` = {$_GET['delete']}";
+                    delete_db($delete_query);
+                }
         ?>
         <div class="content content-all-users">
                         <table>
