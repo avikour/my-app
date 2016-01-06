@@ -13,7 +13,7 @@
         <div class="main">
             <div class="content">
                 <?php
-                    if (isset($_GET['logout'])){
+                    if((isset($_GET['logout'])) || (!logged_in())){
                         session_destroy();
                         header('Location: login.php');
                         exit;
@@ -22,10 +22,6 @@
                         echo " Welcome !!!";?> <br/><br/>     
                         <?php echo "<a href=\"?logout=1\">Logout</a>";?><br />
                         <?php echo "<a href=\"".ADMIN_URL."/edit_user.php\">Go to Admin Dashboard</a>";
-                    }
-                    else {
-                         header('Location: login.php');
-                         exit;
                     }
                 ?>
             </div>
