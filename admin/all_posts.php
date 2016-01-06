@@ -13,7 +13,7 @@
                 $updated_post = $_POST;
                 $update_query = "UPDATE posts
                                 SET `post_name` = \"{$updated_post['post_name']}\",
-                                `content` = \"{$updated_post['content']}\",
+                                `content` = \"{$updated_post['content']}\"
                                 WHERE `id` = {$updated_post['id']}
                                 ";
                 update_db($update_query);

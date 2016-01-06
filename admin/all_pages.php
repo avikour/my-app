@@ -13,7 +13,7 @@
                 $updated_page = $_POST;
                 $update_query = "UPDATE pages
                                 SET `p_name` = \"{$updated_page['p_name']}\",
-                                `content` = \"{$updated_page['content']}\",
+                                `content` = \"{$updated_page['content']}\"
                                 WHERE `id` = {$updated_page['id']}
                                 ";
                 update_db($update_query);
