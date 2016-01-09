@@ -1,38 +1,62 @@
 <?php require_once("admin_functions.php");?>
+
 <?php
     if((isset($_GET['logout'])) || (!logged_in())){
         session_destroy();
         header('Location: login.php');
         exit;
     }
+
     if(logged_in()){
-        admin_header();
-       ?>
-        <?php   
+            admin_header();  
             if(isset($_POST['update']) && ($_POST['update']=='updated')){
+                
                 $updated_page = $_POST;
                 $update_query = "UPDATE pages
-                                SET `p_name` = \"{$updated_page['p_name']}\",
-                                `content` = \"{$updated_page['content']}\"
-                                WHERE `id` = {$updated_page['id']}
-                                ";
-                update_db($update_query);
+                                SET `p_name` = ? ,
+                                `content` = ? 
+                                WHERE `id` = ? ";
+                 
+                db_query(
+                    $update_query,
+                    array(
+                        'ssi',
+                        $updated_page['p_name'],
+                        $updated_page['content'],
+                        $updated_page['id']
+                    )
+                );
             }
 
-            if(isset($_POST['create']) && ($_POST['create']=='created')){            
+            if(isset($_POST['create']) && ($_POST['create']=='created')){  
+                
                 $new_page = $_POST;
                 $create_query = "INSERT INTO `pages`(
                                 `p_name`, `content`)
-                                VALUES (\"{$new_page['p_name']}\",
-                                \"{$new_page['content']}\"
-                                )";
-                create_db($create_query);
+                                VALUES (?, ?)";
+                
+                db_query(
+                    $create_query,
+                    array(
+                        'ss',
+                        $new_page['p_name'],
+                        $new_page['content']
+                    )
+                );
             }
         
-            if(isset($_GET['delete'])){            
+            if(isset($_GET['delete'])){    
+                
                 $delete_query = "DELETE FROM `pages`
-                                WHERE `id` = {$_GET['delete']}";
-                delete_db($delete_query);
+                                WHERE `id` = ?";
+                
+                 db_query(
+                    $delete_query,
+                    array(
+                        'i',
+                        $_GET['delete']
+                    )
+                );
             }
         ?>
         <div class="content content-all-pages">

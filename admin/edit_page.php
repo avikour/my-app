@@ -16,7 +16,7 @@
                 if ($_GET['id'] == 0){
                     echo "Page Not Found";
                 } else {
-                    $query = "SELECT * FROM pages where id = {$_GET['id']}";
+                    $query = "SELECT * FROM pages where id = ".intval($_GET['id']);
                     $page_info = current(get_data($query));
         ?>
             <h2>Edit Page</h2>

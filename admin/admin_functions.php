@@ -8,4 +8,4 @@
 
     function admin_footer() {
         include_once(ADMIN_PATH."/footer.php");
-    }
+    }  
