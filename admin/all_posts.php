@@ -113,7 +113,9 @@
                     }
                     $j = $page + 2;
                     for($i=$page;$i<=$j;$i++){
-                       echo "<a href=\"?page={$i}\">{$i}</a>";
+                        if($i <= $total_pages ){
+                            echo "<a href=\"?page={$i}\">{$i}</a>";
+                        }
                     }
                     if($page!=$total_pages){
                         $next = $page + 1;
