@@ -16,7 +16,7 @@
                 if ($_GET['id'] == 0){
                     echo "User Not Found";
                 } else {
-                    $query = "SELECT * FROM users where id = {$_GET['id']}";
+                    $query = "SELECT * FROM users where id = ".intval($_GET['id']);
                     $user_info = current(get_data($query));
         ?>
             <h2>Edit User Details</h2>

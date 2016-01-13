@@ -1,6 +1,6 @@
 <?php require_once("admin_functions.php");?>
 <?php
-    if (isset($_GET['logout'])){
+    if((isset($_GET['logout'])) || (!logged_in())){
         session_destroy();
         header('Location: login.php');
         exit;
@@ -20,14 +20,9 @@
                         <input type="submit" name="submit" value="Create User"><br />
                         <input type="hidden" name="create" value="created"><br />
                     </form>
-                
                     <?php echo "<a href=\"?logout=1\">Logout</a>";?>
             </div>
 <?php 
-    }
-    else{
-        header('Location: login.php');          
-        exit;
     }
 ?>
 <?php admin_footer(); ?>

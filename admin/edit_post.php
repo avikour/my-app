@@ -16,8 +16,8 @@
                 if ($_GET['id'] == 0){
                     echo "Post Not Found";
                 } else {
-                    $query = "SELECT * FROM posts where id = {$_GET['id']}";
-                    $post_info = current(get_data($query));
+                    $query = "SELECT * FROM posts where id = ".intval($_GET['id']);
+                    $post_info = current(get_data($query));  
         ?>
             <h2>Edit Post</h2>
             <form action="<?php echo ADMIN_URL ?>/all_posts.php" method="post">

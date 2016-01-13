@@ -33,47 +33,57 @@
    function get_data($query){
        global $db;
        $all_data = array();
-       if($all = mysqli_query($db,$query)) {
-           while($row = mysqli_fetch_assoc($all) ) {
+       
+       if($all = $db->query($query)) {
+           while($row = $all->fetch_assoc()){
                $all_data[] = $row;
             }
         }
        return $all_data;
    }
     
-    function update_db($query){
-        global $db;
-        mysqli_query($db,$query);
+    function refValues($arr){
+        if (strnatcmp(phpversion(),'5.3') >= 0) //Reference is required for PHP 5.3+
+        {
+            $refs = array();
+            foreach($arr as $key => $value)
+                $refs[$key] = &$arr[$key];
+            return $refs;
+        }
+        return $arr;
+    }
+    function db_query($query,$params = array() ){
         
-    }
-
-    function create_db($query){
         global $db;
-        mysqli_query($db,$query);
-    }
-
-    function delete_db($query){
-        global $db;
-        mysqli_query($db,$query);
+        $update_query = $db->prepare($query);
+        call_user_func_array( array($update_query, 'bind_param'), refValues($params) );
+        return $update_query->execute();
     }
 
     function authenticate(){
         //to authenticate username and password for user login
         global $db;
         if(isset($_POST['my_login']) && ($_POST['my_login']=="logged_in")){
-            $query = "SELECT `u_name`, `pass`
+            
+            $query = $db->prepare("SELECT `u_name`, `pass`
                         FROM users
-                        WHERE `u_name` = \"{$_POST['u_name']}\" AND
-                        `pass` = \"{$_POST['pass']}\"";
-            if((mysqli_num_rows(mysqli_query($db,$query))) == 1){
+                        WHERE `u_name` = ? AND `pass` = ?");
+            
+            $query->bind_param('ss',$_POST['u_name'],$_POST['pass']);
+            $query->execute();
+                    
+            if( $res = $query->get_result() ) {
                 
-                $_SESSION['u_name'] = $_POST['u_name'];
-                $_SESSION['logged_in'] = true;
-                header('Location: index.php');
-                exit;
-            }
-            else {
-                echo "Username or Password is incorrect!";
+                if($res->num_rows == 1){
+
+                    $_SESSION['u_name'] = $_POST['u_name'];
+                    $_SESSION['logged_in'] = true;
+                    header('Location: index.php');
+                    exit;
+                }
+                else {
+                    echo "Username or Password is incorrect!";
+                }
             }
         }
     }

@@ -10,35 +10,64 @@
         ?>
         <?php   
                 if(isset($_POST['update']) && ($_POST['update']=='updated')){
+                    
                     $updated_user = $_POST;
+                    
                     $update_query = "UPDATE users
-                                    SET `f_name` = \"{$updated_user['f_name']}\",
-                                    `l_name` = \"{$updated_user['l_name']}\",
-                                    `u_name` = \"{$updated_user['u_name']}\",
-                                    `email` = \"{$updated_user['email']}\",
-                                    `pass` = \"{$updated_user['pass']}\"
-                                    WHERE `id` = {$updated_user['id']}
+                                    SET `f_name` = ? ,
+                                    `l_name` = ? ,
+                                    `u_name` = ? ,
+                                    `email` = ? ,
+                                    `pass` = ?
+                                    WHERE `id` = ?
                                     ";
-                    update_db($update_query);
+                    
+                    db_query(
+                        $update_query,
+                        array(
+                            'sssssi',
+                            $updated_user['f_name'],
+                            $updated_user['l_name'],
+                            $updated_user['u_name'],
+                            $updated_user['email'],
+                            $updated_user['pass'],
+                            $updated_user['id']   
+                        )
+                    );
                 }
 
-                if(isset($_POST['create']) && ($_POST['create']=='created')){            
+                if(isset($_POST['create']) && ($_POST['create']=='created')){  
+                    
                     $new_user = $_POST;
                     $create_query = "INSERT INTO `users`(
                                     `f_name`, `l_name`, `u_name`, `email`, `pass`)
-                                    VALUES (\"{$new_user['f_name']}\",
-                                    \"{$new_user['l_name']}\",
-                                    \"{$new_user['u_name']}\",
-                                    \"{$new_user['email']}\",
-                                    \"{$new_user['pass']}\"
-                                    )";
-                    create_user($create_query);
+                                    VALUES (?,?,?,?,?)";
+                
+                    db_query(
+                        $create_query,
+                        array(
+                            'sssss',
+                            $new_user['f_name'],
+                            $new_user['l_name'],
+                            $new_user['u_name'],
+                            $new_user['email'],
+                            $new_user['pass']
+                        )
+                    );
                 }
         
-                if(isset($_GET['delete'])){            
+                if(isset($_GET['delete'])){ 
+                    
                     $delete_query = "DELETE FROM `users`
-                                    WHERE `id` = {$_GET['delete']}";
-                    delete_db($delete_query);
+                                WHERE `id` = ?";
+                
+                     db_query(
+                        $delete_query,
+                        array(
+                            'i',
+                            $_GET['delete']
+                        )
+                    );   
                 }
         ?>
         <div class="content content-all-users">
